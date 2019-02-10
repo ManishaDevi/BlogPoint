@@ -47,8 +47,8 @@ def addUser():
 def userLogin():
     data = request.get_json()
     user = mongo.db.users
-    isUserExist=""
-    session["isUserExist"] = user.find_one({'userName': data["userName"]})
+   
+    isUserExist = user.find_one({'userName': data["userName"]})
     #session ["username"]=user.find_one({'userName': data["userName"]})
     if(isUserExist):
         return jsonify(
