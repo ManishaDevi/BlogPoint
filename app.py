@@ -47,8 +47,8 @@ def addUser():
 def userLogin():
     data = request.get_json()
     user = mongo.db.users
-
-    isUserExist = user.find_one({'userName': data["userName"]})
+    isUserExist=""
+    session["isUserExist"] = user.find_one({'userName': data["userName"]})
     #session ["username"]=user.find_one({'userName': data["userName"]})
     if(isUserExist):
         return jsonify(
@@ -134,10 +134,10 @@ def getUserBlog():
     })
 
 
-@app.route("/user/logout")
+@app.route("/user/logout",methods=["POST", "GET"])
 def logOut():
-    print("hi1")
-    session.pop('username', None)
+    print("inside logout backend")
+    session.pop('isUserExist')
     return jsonify({
         "success": True, })
 
